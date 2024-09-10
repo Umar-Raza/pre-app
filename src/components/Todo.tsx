@@ -13,6 +13,18 @@ export const Todo = () => {
       text: "todo3",
       id: 3,
     },
+    {
+      text: "todo4",
+      id: 4,
+    },
+    {
+      text: "todo5",
+      id: 5,
+    },
+    {
+      text: "todo6",
+      id: 6,
+    },
   ]);
 
   const deleteItem = (itemId: number) => {
@@ -27,7 +39,7 @@ export const Todo = () => {
     <ul>
       {todos.map((todoItem) => {
         return (
-          <li
+          <li id={`todo_item_${todoItem.id}`}
             onClick={() => {
               deleteItem(todoItem.id);
             }}
