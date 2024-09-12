@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { TodoItem } from "./TodoItem";
 export const Todo = () => {
   const [todos, setTodos] = useState([
     {
@@ -35,9 +36,30 @@ export const Todo = () => {
     );
   };
 
+  const addnewTodo = () => {
+    setTodos((todos) => {
+      return [
+        {
+          text: "new todo",
+          id: Date.now(),
+        },
+        ...todos,
+      ];
+    });
+  };
+
   return (
     <ul>
+      <li>
+        <button onClick={addnewTodo}>Click to add new todo</button>
+      </li>
+
       {todos.map((todoItem) => {
+        return (
+          <TodoItem key={todoItem.id} item={todoItem} onDelete={deleteItem} />
+        );
+      })}
+      {/* {todos.map((todoItem) => {
         return (
           <li id={`todo_item_${todoItem.id}`}
             onClick={() => {
@@ -48,7 +70,7 @@ export const Todo = () => {
             {todoItem.text}
           </li>
         );
-      })}
+      })} */}
     </ul>
   );
 };
