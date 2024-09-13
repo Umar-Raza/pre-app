@@ -1,4 +1,7 @@
 import { SyntheticEvent, useState } from "react";
+// import { Button } from "./Button";
+import Button from "@mui/material/Button";
+import TextField from "@mui/material/TextField";
 
 export const LoginForm = () => {
   const [email, setEmail] = useState("");
@@ -15,7 +18,11 @@ export const LoginForm = () => {
   };
   return (
     <form className="flex flex-col gap-4" onClick={handleSubmit}>
-      <input
+
+      <TextField
+        id="outlined-basic"
+        label="Email"
+        variant="outlined"
         onChange={(event) => {
           setEmail(event.target.value);
         }}
@@ -23,7 +30,10 @@ export const LoginForm = () => {
         type="email"
         placeholder="Enter your Emal"
       />
-      <input
+
+      <TextField
+        label="Password"
+        variant="outlined"
         onChange={(event) => {
           setPassword(event.target.value);
         }}
@@ -31,7 +41,8 @@ export const LoginForm = () => {
         type="password"
         placeholder="Enter your Password"
       />
-      <button type="submit">Submit</button>
+
+      <Button type="submit" variant="contained">SUBMIT</Button>
     </form>
   );
 };
