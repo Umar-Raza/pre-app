@@ -1,5 +1,5 @@
 import { useState } from "react";
-
+import Button from "@mui/material/Button";
 const Counter = () => {
   const [counterValue, setIsCounterValue] = useState(0);
 
@@ -18,11 +18,17 @@ const Counter = () => {
       <h2 className="text-xl">Coun is</h2>
       <p className="text-xl">{counterValue}</p>
       <div className="flex gap-4 mb-4 justify-center">
-        <button onClick={increment}>+ increment</button>
-        <button onClick={decrement}>- Decrement</button>
+        <Button variant="outlined" onClick={increment}>
+          + increment
+        </Button>
+        <Button variant="outlined" onClick={decrement}>
+          - Decrement
+        </Button>
       </div>
       <div className="flex justify-center">
-        <button onClick={reset}>Reset</button>
+        <Button variant="outlined" color="error" onClick={reset}>
+          Reset
+        </Button>
       </div>
     </section>
   );
