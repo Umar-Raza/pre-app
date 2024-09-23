@@ -1,32 +1,32 @@
 import React, { FC, useEffect } from "react";
+import { Todo } from "../typs";
 
-type Todo = {
-  text: string;
-  id: number;
-};
+
 
 type TodoItemProps = {
   item: Todo;
-  onDelete: (itemId: number) => void;
+
+  // onDelete: (itemId: number) => void;
 };
 
-export const TodoItem: FC<TodoItemProps> = ({ item, onDelete }) => {
-  useEffect(() => {
-    console.log(`component render for item ${item.id}`);
+export const TodoItem: FC<TodoItemProps> = ({ item }) => {
+  // useEffect(() => {
+  //   console.log(`component render for item ${item.id}`);
 
-    return () => {
-      console.log(`component removed for item ${item.id}`);
-    };
-  }, []);
+  //   return () => {
+  //     console.log(`component removed for item ${item.id}`);
+  //   };
+  // }, []);
 
   return (
-    <li
-      onClick={() => {
-        onDelete(item.id);
-      }}
-      id={`todo item ${item.id}`}
-    >
-      {item.text}
-    </li>
+    <li id={`todo_item_${item.id}`}>{item.title}</li>
+    // <li
+    //   onClick={() => {
+    //     onDelete(item.id);
+    //   }}
+    //   id={`todo item ${item.id}`}
+    // >
+    //   {item.text}
+    // </li>
   );
 };
