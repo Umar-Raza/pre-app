@@ -21,7 +21,7 @@ const StickyNote: FC<StickyNoteItemProps> = ({ note }) => {
   return (
     <Box sx={{ minWidth: 200 }}>
       <Card variant="outlined" className="max-w-sm relative">
-        {note.starred && (
+        {note.complete && (
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
@@ -40,7 +40,7 @@ const StickyNote: FC<StickyNoteItemProps> = ({ note }) => {
             Note
           </Typography>
           <Typography variant="h5" component="div">
-            {note.text}
+            {note.title}
           </Typography>
         </CardContent>
         <CardActions className="flex justify-end">

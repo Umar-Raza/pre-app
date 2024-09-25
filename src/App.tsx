@@ -1,8 +1,10 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
 import Notes from "./components/Notes";
 import { Note } from "./typs";
 import { AppContext } from "./AppContext";
+import { useWindowResize } from "./hooks/useWindowSize";
+import { useFetch } from "./hooks/useFetch";
 
 // import { PostsPage } from "./PostsPage";
 // import AutoCounter from "./components/AutoCounter";
@@ -44,38 +46,16 @@ function App() {
   //   const count = todos.filter((todo) => todo.completed).length;
   //   setFinishedCount(count);
   // }, [todos]);
-  const [notes, setNotes] = useState<Note[]>([
-    {
-      text: "note 1",
-      id: 1,
-      starred: true,
-    },
-    {
-      text: "note 2",
-      id: 2,
-      starred: false,
-    },
-    {
-      text: "note 3",
-      id: 3,
-      starred: false,
-    },
-    {
-      text: "note 4",
-      id: 4,
-      starred: false,
-    },
-    {
-      text: "note 5",
-      id: 5,
-      starred: false,
-    },
-    {
-      text: "note 6",
-      id: 6,
-      starred: false,
-    },
-  ]);
+  const [notes, setNotes] = useState<Note[]>([]);
+
+  const size = useWindowResize();
+  const { data, loading } = useFetch<Note[]>(
+    "https://jsonplaceholder.typicode.com/todos"
+  );
+
+  useEffect(() => {
+    setNotes(data ? data : []);
+  }, [data]);
 
   const toggleStarNote = (noteId: number) => {
     setNotes(
@@ -83,7 +63,7 @@ function App() {
         if (noteItem.id === noteId) {
           return {
             ...noteItem,
-            starred: !noteItem.starred,
+            complete: !noteItem.complete,
           };
         }
         return noteItem;
@@ -98,10 +78,13 @@ function App() {
       })
     );
   };
+  if (loading) {
+    return <h1>Loading...</h1>;
+  }
 
   return (
     <AppContext.Provider value={{ notes, deleteNote, toggleStarNote }}>
-      <Notes />
+      {size.width < 360 ? <h1>Resulution is note Sported.</h1> : <Notes />}
 
       {/* <p className="text-2xl">
         Finished todo <span>{finishedCount}</span>
